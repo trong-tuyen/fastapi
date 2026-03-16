@@ -1,6 +1,6 @@
 # FastAPI Task Management Application
 
-A comprehensive FastAPI learning project demonstrating user authentication, task CRUD operations, and role-based access control. Features JWT-based authentication, Argon2id password hashing, task ownership enforcement, and 49 comprehensive unit tests.
+A comprehensive FastAPI learning project demonstrating user authentication, task CRUD operations, project management, and role-based access control. Features JWT-based authentication, Argon2id password hashing, task ownership enforcement, and 90 comprehensive unit tests.
 
 ## Overview
 
@@ -10,7 +10,8 @@ This project builds a production-like task management API with:
 - Full CRUD operations for tasks with filtering, search, and pagination
 - Role-based access control (user vs admin)
 - Task ownership enforcement (users can only access their own tasks)
-- 49 unit tests covering all major functionality
+- Project management with task assignments
+- 90 unit tests covering all major functionality
 - Modular architecture with clear separation of concerns
 
 ## Tech Stack
@@ -144,9 +145,10 @@ fastapi_practice/
 ├── tests/                       # Test suite
 │   ├── __init__.py
 │   ├── conftest.py             # Pytest fixtures and configuration
-│   ├── test_auth.py            # User authentication tests (19 tests)
-│   ├── test_tasks.py           # Task CRUD tests (18 tests)
-│   └── test_auth_errors.py     # Authorization and error handling tests (12 tests)
+│   ├── test_auth.py            # User authentication tests (18 tests)
+│   ├── test_tasks.py           # Task CRUD tests (39 tests)
+│   ├── test_projects.py        # Project management tests (19 tests)
+│   └── test_auth_errors.py     # Authorization and error handling tests (14 tests)
 │
 ├── requirements.txt             # Python dependencies
 ├── .env.example                # Example environment variables
@@ -167,17 +169,17 @@ Authorization: Bearer <your-access-token>
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| POST | /users/register | Register new user | ❌ |
-| POST | /users/login | Login & get token | ❌ |
-| GET | /users/me | Get current profile | ✅ |
-| PUT | /users/me | Update profile | ✅ |
-| POST | /tasks | Create task | ✅ |
-| GET | /tasks | List my tasks | ✅ |
-| GET | /tasks/{id} | Get task details | ✅ |
-| PUT | /tasks/{id} | Update task | ✅ |
-| DELETE | /tasks/{id} | Delete task | ✅ |
-| POST | /projects | Create project | ✅ |
-| GET | /projects | List my projects | ✅ |
+| POST | /users/register | Register new user | No |
+| POST | /users/login | Login & get token | No |
+| GET | /users/me | Get current profile | Yes |
+| PUT | /users/me | Update profile | Yes |
+| POST | /tasks | Create task | Yes |
+| GET | /tasks | List my tasks | Yes |
+| GET | /tasks/{id} | Get task details | Yes |
+| PUT | /tasks/{id} | Update task | Yes |
+| DELETE | /tasks/{id} | Delete task | Yes |
+| POST | /projects | Create project | Yes |
+| GET | /projects | List my projects | Yes |
 
 **Query Parameters for Task List:**
 - `?status=todo` - Filter by status (todo, in_progress, done)
@@ -222,10 +224,11 @@ pytest tests/test_auth.py::TestRegister::test_register_success -v
 pytest tests/ --cov=app --cov-report=html
 ```
 
-**Test Coverage** (49 tests):
-- Authentication: 19 tests (Register, Login, Profile, Token Management)
-- Task CRUD: 18 tests (Create, Read, Update, Delete, Filtering, Pagination)
-- Authorization: 12 tests (Ownership, Permissions, Error Handling)
+**Test Coverage** (90 tests):
+- Authentication: 18 tests (Register, Login, Profile, Token Management)
+- Task CRUD: 39 tests (Create, Read, Update, Delete, Filtering, Pagination, Isolation)
+- Project Management: 19 tests (Create, List, Task Assignment, Authorization)
+- Authorization & Errors: 14 tests (Ownership, Permissions, Error Handling, Edge Cases)
 
 ## Environment Variables
 
